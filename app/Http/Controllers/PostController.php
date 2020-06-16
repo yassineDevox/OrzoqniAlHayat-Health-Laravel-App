@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePost;
+use App\Image;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts=Post::all();
+
+        return view('posts.index',['posts'=> $posts]);
     }
 
     /**
@@ -24,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -33,9 +37,21 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePost $request)
     {
-        //
+        $validatedData = $request->validated();
+
+        $fileName =  "image-".time().'.'.$request->image->getClientOriginalExtension();
+        $request->image->storeAs('image', $fileName);
+            
+        $image = new Image();
+        $image->image = $fileName;
+        $image->save();
+        
+        $validatedData['image_id']=$image->id;
+        $Post = Post::create($validatedData);
+
+        return redirect()->route('posts.show', ['post' => $Post->id]);
     }
 
     /**
