@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="text-align : center">New Post</h1>
-            <form method="POST" enctype="multipart/form-data" id="upload_image_form" action="{{route('posts.store')}}">
+            <form method="POST" enctype="multipart/form-data" action="{{route('admin.posts.store')}}">
                 @csrf
                 @include('posts.form')
             

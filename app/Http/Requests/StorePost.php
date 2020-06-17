@@ -26,7 +26,6 @@ class StorePost extends FormRequest
         return [
             'title' => 'required',
             'body' => 'required',
-            'image_id'=>'required'
         ];
     }
 }

@@ -6,6 +6,5 @@ class HomeController
 {
     public function index()
     {
-        return view('posts.index');
     }
 }
