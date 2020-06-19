@@ -62,7 +62,7 @@
         </ul>
     </header>
 
-    <div class="app-body">
+    <div class="app-body bg-white">
         @include('partials.menu')
         <main class="main">
 

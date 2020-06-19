@@ -17,10 +17,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts=Post::with(['image'])->get();
+        // $posts=Post::with(['image'])->get();
+
+        $images=Image::with(['post'])->get();
 
         return view('posts.index',[
-            'posts'=> $posts
+            // 'posts'=> $posts,
+            'images'=>$images
             ]);
     }
 
@@ -53,7 +56,7 @@ class PostController extends Controller
             $file= $request->file('imgName');
             
             $name ="image-".time().'.'.$file->getClientOriginalExtension();
-            $file->storeAs('post-images', $name);
+            $file->move('posts-img', $name);
             $image->imgName=$name;
             $image->post_id=$post->id;
             

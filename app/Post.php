@@ -12,6 +12,6 @@ class Post extends Model
         'body',
     ];
     public function image(){
-        return $this->hasMany(Image::class);
+        return $this->hasOne(Image::class);
     }
 }

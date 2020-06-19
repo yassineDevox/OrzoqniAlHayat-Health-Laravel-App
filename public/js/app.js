@@ -19283,45 +19283,6 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-$(document).ready(function (e) {
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-  $('#image').change(function () {
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-      $('#image_preview_container').attr('src', e.target.result);
-    };
-
-    reader.readAsDataURL(this.files[0]);
-  });
-  $('#upload_image_form').submit(function (e) {
-    var _this = this;
-
-    e.preventDefault();
-    var formData = new FormData(this);
-    $.ajax({
-      type: 'POST',
-      url: "{{ url('photo')}}",
-      data: formData,
-      cache: false,
-      contentType: false,
-      processData: false,
-      success: function success(data) {
-        _this.reset();
-
-        alert('Image has been uploaded successfully');
-      },
-      error: function error(data) {
-        console.log(data);
-      }
-    });
-  });
-});
-
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
