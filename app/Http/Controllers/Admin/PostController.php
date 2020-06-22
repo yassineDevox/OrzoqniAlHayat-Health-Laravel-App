@@ -122,7 +122,7 @@ class PostController extends Controller
 
         $request->session()->flash('status','Post was updated!');
 
-        return redirect()->route('posts.index');
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -131,12 +131,12 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StorePost $request,$id)
+    public function destroy(Request $request,$id)
     {
+        $imageId=Image::where('post_id','=',$id);
+        Image::destroy($imageId);
         Post::destroy($id);
 
-        $request->session()->flash('status','Post was deleted!');
-
-        return redirect()->route('posts.index');
+        return redirect()->route('admin.posts.index');
     }
 }

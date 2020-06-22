@@ -32,13 +32,13 @@
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
-    <header class="app-header navbar">
+    <header class="app-header navbar bg-dark">
         <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="#">
-            <span class="navbar-brand-full text-danger">Menu</span>
-            <span class="navbar-brand-minimized text-danger">Menu</span>
+            <span class="navbar-brand-full text-success">Menu</span>
+            <span class="navbar-brand-minimized text-success">Menu</span>
         </a>
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
             <span class="navbar-toggler-icon"></span>
@@ -65,9 +65,7 @@
     <div class="app-body bg-white">
         @include('partials.menu')
         <main class="main">
-
-
-            <div style="padding-top: 20px" class="container-fluid">
+            <div class="container-fluid">
                 @if(session('message'))
                     <div class="row mb-2">
                         <div class="col-lg-12">

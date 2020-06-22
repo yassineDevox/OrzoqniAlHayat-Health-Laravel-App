@@ -7,7 +7,7 @@
                     <i class="nav-icon fas fa-fw fa-tachometer-alt text-success">
 
                     </i>
-                    {{ trans('global.dashboard') }}
+                    News Feed
                 </a>
             </li>
             @can('user_management_access')

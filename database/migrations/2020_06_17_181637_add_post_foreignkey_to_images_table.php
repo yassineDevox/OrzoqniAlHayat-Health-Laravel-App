@@ -15,7 +15,7 @@ class AddPostForeignkeyToImagesTable extends Migration
     {
         Schema::table('images', function (Blueprint $table) {
             $table->foreignId('post_id')->constrained();
-        });
+        }); 
     }
 
     /**
