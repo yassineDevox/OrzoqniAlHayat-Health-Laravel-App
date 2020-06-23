@@ -154,17 +154,18 @@ div.gallery h2 {
     color:rgb(146, 13, 13);
   }
 div.gallery a {
-    color:rgb(146, 13, 13);
+    color: rgb(146, 13, 13);
     display: inline;
-  }
+}
 div.desc {
   padding: 15px;
   text-align: center;
   justify-content: center;
 }
-div.gallery a.btn-warning{
+.form-inlining{
     display: inline;
 }
-form.btn-danger{
-    display: inline;
+
+header.app-header img{
+    right: 0px;
 }

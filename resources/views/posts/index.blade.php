@@ -6,15 +6,17 @@
             <ul class="list-group">
                 @forelse ($images as $image)
                 <div class="gallery">
-                    <h2><a class="text-center" href="{{ route( 'admin.posts.show' ,[ 'post' => $image->post->id ]) }} "> {{$image->post->title}} </a></h2>
+                    <h2>{{$image->post->title}}</h2>
                       <img src="{{asset('posts-img/'.$image->imgName)}}" width="600" height="400">
                     </a>
                     <div class="desc">{{$image->post->body}}</div>
-                    <a class="btn btn-warning" href="{{route('admin.posts.edit',['post'=>$image->post->id])}}">Edit</a>
-                    <form method="POST" action="{{route('admin.posts.destroy',['post'=>$image->post_id])}}">
+                    <button class="btn btn-secondary btn-block text-white">
+                        <a href="{{route('admin.posts.edit',['post'=>$image->post->id])}}">Edit</a>    
+                    </button>                    
+                    <form class="form-inlining" method="POST" action="{{route('admin.posts.destroy',['post'=>$image->post_id])}}">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Delete</button>
+                        <button class="btn btn-danger btn-block" type="submit">Delete</button>
                     </form>   
                   </div>
                 {{-- <li class="list-group-item">

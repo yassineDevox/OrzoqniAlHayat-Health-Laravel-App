@@ -133,8 +133,8 @@ class PostController extends Controller
      */
     public function destroy(Request $request,$id)
     {
-        $imageId=Image::where('post_id','=',$id);
-        Image::destroy($imageId);
+        $image=Image::where('post_id',$id)->first();
+        Image::destroy($image->id);
         Post::destroy($id);
 
         return redirect()->route('admin.posts.index');
