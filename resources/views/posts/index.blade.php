@@ -2,35 +2,32 @@
 @section('content')
 <div class="content">
     <div class="row">
+        <a class="btn btn-success float-left" href="{{route('admin.posts.create')}}" >Add Post</a>
+
         <div class="col-lg-12">
-            <ul class="list-group">
-                @forelse ($images as $image)
+            <ul class="list-group"> 
+                @forelse ($posts as $post)
                 <div class="gallery">
-                    <h2>{{$image->post->title}}</h2>
-                      <img src="{{asset('posts-img/'.$image->imgName)}}" width="600" height="400">
-                    </a>
-                    <div class="desc">{{$image->post->body}}</div>
-                    <button class="btn btn-secondary btn-block text-white">
-                        <a href="{{route('admin.posts.edit',['post'=>$image->post->id])}}">Edit</a>    
-                    </button>                    
-                    <form class="form-inlining" method="POST" action="{{route('admin.posts.destroy',['post'=>$image->post_id])}}">
+                    <div class="mb-3 pics animation all">
+                    <h3>{{$post->title}}</h3>
+                      <img usemap="{{route('admin.posts.index')}}" src="{{asset('posts-img/'.$post->image->imgName)}}" width="600" height="400"> 
+                    <div class="desc">
+                        <p class="ArticleBody">{{ substr(strip_tags($post->body), 0, 500) }}
+                            {{ strlen(strip_tags($post->body)) > 50 ? "..." : "" }} 
+                        </p>
+                        <a href="{{route('admin.posts.show',['post'=>$post->id])}}">Read More ...</a>
+                    </div>
+                    
+                    {{-- <form style="display: inline" method="POST" action="{{route('admin.posts.destroy',['post'=>$post->id])}}">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger btn-block" type="submit">Delete</button>
-                    </form>   
+                        <button class="btn btn-success col-md-6" type="button">
+                        <a style="color: white" href="{{route('admin.posts.edit',['post'=>$post->id])}}">Edit</a>
+                        </button>
+                        <button class="btn btn-danger float-right col-md-6" type="submit">Delete</button>
+                    </form>    --}}
                   </div>
-                {{-- <li class="list-group-item">
-                    <h2><a class="text-dark" href="{{ route( 'admin.posts.show' ,[ 'post' => $image->post->id ]) }} "> {{$image->post->title}} </a></h2>
-                    <img class="img-post"  src="{{asset('posts-img/'.$image->imgName)}}">
-                    <p>{{$image->post->body}}</p>
-                    <em>{{$image->post->created_at->diffForHumans()}}</em>
-                    <a class="btn btn-warning" href="{{route('admin.posts.edit',['post'=>$image->post->id])}}">Edit</a>
-                    <form method="POST" action="{{route('admin.posts.destroy',['post'=>$image->post_id])}}">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Delete</button>
-                    </form>   
-                </li> --}}
+                </div>
                 @empty
                 <span class="badge badge-secondary"><h1>NO POSTS YET</h1></span>
                 @endforelse

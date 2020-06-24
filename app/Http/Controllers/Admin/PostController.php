@@ -7,6 +7,7 @@ use App\Http\Requests\StorePost;
 use App\Image;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -19,11 +20,10 @@ class PostController extends Controller
     {
         // $posts=Post::with(['image'])->get();
 
-        $images=Image::with(['post'])->get();
+        $posts=Post::with(['image'])->orderBy('created_at', 'desc')->get();
 
         return view('posts.index',[
-            // 'posts'=> $posts,
-            'images'=>$images
+            'posts'=>$posts
             ]);
     }
 
@@ -45,26 +45,24 @@ class PostController extends Controller
      */
     public function store(StorePost $request)
     {
-        $post= new Post();
         $data = $request->all();
 
-        $post = Post::create($data);
 
         $image= new Image();
 
-        if($request->hasFile('imgName')){
-            $file= $request->file('imgName');
+        
+        $file= $request->file('imgName');
             
-            $name ="image-".time().'.'.$file->getClientOriginalExtension();
-            $file->move('posts-img', $name);
-            $image->imgName=$name;
-            $image->post_id=$post->id;
+        $name ="image-".time().'.'.$file->getClientOriginalExtension();
+        $file->move('posts-img', $name);
+        $image->imgName=$name;
             
-            $image->save();
+        $image->save();
             
-        }
-        else
-        echo "no file found";
+        $data['image_id']=$image->id;
+
+        Post::create($data);
+        
 
         // return redirect()->route('admin.posts.index');
     }
@@ -91,8 +89,11 @@ class PostController extends Controller
     public function edit($id)
     {
         $post=Post::findOrFail($id);
+
+        $image=Image::where('id',$post->image_id)->first();
         return view('posts.edit',[
-            'post'=>$post
+            'post'=>$post,
+            'image'=>$image,    
         ]);
     }
 
@@ -106,21 +107,35 @@ class PostController extends Controller
     public function update(StorePost $request, $id)
     {
         $post=Post::findOrFail ($id);
+
         $post->title=$request->input('title');
         $post->body=$request->input('body');
 
-        $fileName =  "image-".time().'.'.$request->image->getClientOriginalExtension();
-        $request->image->storeAs('image', $fileName);
+        if($request->hasFile('imgName')){
             
-        $image = new Image();
-        $image->name = $fileName;
-        $image->save();
+            $originalImage=Image::where('id',$post->image_id)->first();
 
-        $post->image_id=$image->id;
+            $image=new Image();
+            $image_path = "posts-img/$originalImage->imgName"; 
 
+            if(File::exists($image_path)) {
+                File::delete($image_path);
+            }
+            $file= $request->file('imgName');
+            
+            $name ="image-".time().'.'.$file->getClientOriginalExtension();
+            $file->move('posts-img', $name);
+            $image->imgName=$name;
+            $post->image_id=$image->id;
+            Image::destroy($originalImage->id);
+
+            
+            $image->save();
+            
+        }
+        else
+        echo "no file";
         $post->save();
-
-        $request->session()->flash('status','Post was updated!');
 
         return redirect()->route('admin.posts.index');
     }
@@ -134,6 +149,7 @@ class PostController extends Controller
     public function destroy(Request $request,$id)
     {
         $image=Image::where('post_id',$id)->first();
+
         Image::destroy($image->id);
         Post::destroy($id);
 

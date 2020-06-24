@@ -138,6 +138,7 @@ div.gallery {
   border: 1px solid #ccc;
   float: left;
   width: 760px;
+  height: fit-content;
 }
 
 div.gallery:hover {
@@ -148,24 +149,17 @@ div.gallery img {
   width: 100%;
   height: auto;
 }
-div.gallery h2 {
+div.gallery h3 {
     text-align: center;
     font-family: fantasy;
-    color:rgb(146, 13, 13);
+    color:rgb(221, 40, 40);
   }
 div.gallery a {
-    color: rgb(146, 13, 13);
+    color: rgb(0, 0, 0);
     display: inline;
 }
 div.desc {
   padding: 15px;
-  text-align: center;
+  text-align: left;
   justify-content: center;
-}
-.form-inlining{
-    display: inline;
-}
-
-header.app-header img{
-    right: 0px;
 }
