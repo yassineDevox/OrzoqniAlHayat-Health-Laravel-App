@@ -4,7 +4,7 @@ More basic infos are in the original template I used as a base: https://github.c
 
 ---
 ## Some Screenshots of the work in progress
-!(https://drive.google.com/file/d/10EKHediYSB4eIIf6WFWuhtyGMlEizkTb/view?usp=sharing)
+!(https://data.whicdn.com/images/345756976/original.png)
 
 ## What for?
 The goal of this project consists on the development of a dynamic "Health Sector Interface - Patients" Website linked to a Mobile Application. It should mainly allow:
