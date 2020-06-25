@@ -28,4 +28,5 @@ The project will also have to meet the different functional expectations of the 
 
 ## License
 
-Basically, feel free to use the basic project I used of course after checking if by now still free to use and re-use any way you want. Secondally feel free to be inspired by any tool or code or anything here.
+- Basically, feel free to use the basic template that I also used from another github project (link above), of course after checking if by now still free to use and re-use in any way you want. 
+- Secondally feel free to be inspired by any tool or code or anything here.
