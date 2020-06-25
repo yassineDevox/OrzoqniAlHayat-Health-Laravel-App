@@ -4,6 +4,13 @@ More basic infos are in the original template I used as a base: https://github.c
 
 ---
 
+## What for?
+The goal of this project consists on the development of a dynamic "Health Sector Interface - Patients" Website linked to a Mobile Application. It should mainly allow:
+ Management of donation announcements by the hospital.
+ Managing the different profiles of users registered on the site.
+ Management of appointment booking.
+ Bringing citizens closer to the health sector and its services.
+The project will also have to meet the different functional expectations of the users involved (Donors, Patients, Doctors, etc.). In its design, it will have to comply with the recommendations and management constraints of most departments in the health sector.
 ## How to use
 
 - Clone the repository with __git clone__
