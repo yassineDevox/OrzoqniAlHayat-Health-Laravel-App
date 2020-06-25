@@ -27,7 +27,7 @@
         <div class="col-md-12">
         <img class="col-md-10 " src="{{asset('posts-img/'.$image->imgName)}}">
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <input class="form-control" type="file" name="imgName" id="imgName">
         </div>
     </div>
@@ -44,11 +44,7 @@
     
     @endif
 
-    <div style="display: inline" class="form-group col-sm-5">
-        <button class="btn btn-danger" type="submit">Update</button>
-        <a class="btn btn-success float-right" href="{{route('admin.posts.index')}}" >Return</a>
-    </div>
-    <div class="form-group col-sm-5"></div>
+    <button class="btn btn-danger col-md-2 float-right" type="submit">Update</button>
 
 </form>   
 @endsection

@@ -64,7 +64,7 @@ class PostController extends Controller
         Post::create($data);
         
 
-        // return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -75,8 +75,12 @@ class PostController extends Controller
      */
     public function show($id)
     {
+        $post=Post::findOrFail($id);
+
+        $image=Image::where('id',$post->image_id)->first();
         return view('posts.show',[
-            'post'=> Post::findOrFail($id)
+            'post'=> $post,
+            'image'=>$image
         ]);
     }
 
@@ -116,7 +120,8 @@ class PostController extends Controller
             $originalImage=Image::where('id',$post->image_id)->first();
 
             $image=new Image();
-            $image_path = "posts-img/$originalImage->imgName"; 
+            $image_path = "posts-img/.$originalImage->imgName"; 
+
 
             if(File::exists($image_path)) {
                 File::delete($image_path);
@@ -126,16 +131,18 @@ class PostController extends Controller
             $name ="image-".time().'.'.$file->getClientOriginalExtension();
             $file->move('posts-img', $name);
             $image->imgName=$name;
-            $post->image_id=$image->id;
-            Image::destroy($originalImage->id);
-
-            
             $image->save();
             
+            $post->image_id=$image->id;
+            
+            $post->save();
+
+            Image::destroy($originalImage->id);
+            
         }
-        else
-        echo "no file";
-        $post->save();
+        else {
+            $post->save();
+        }
 
         return redirect()->route('admin.posts.index');
     }
@@ -148,10 +155,18 @@ class PostController extends Controller
      */
     public function destroy(Request $request,$id)
     {
-        $image=Image::where('post_id',$id)->first();
+        $post=Post::findOrFail($id);
+
+        $image=Image::where('id',$post->image_id)->first();
+
+        $image_path = public_path().'/posts-img/'.$image->imgName; 
+
+        if(File::exists($image_path)) {
+            unlink($image_path);
+        }
+        Post::destroy($id);
 
         Image::destroy($image->id);
-        Post::destroy($id);
 
         return redirect()->route('admin.posts.index');
     }

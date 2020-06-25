@@ -163,3 +163,8 @@ div.desc {
   text-align: left;
   justify-content: center;
 }
+
+.col-lg-12.img-post{
+    display: flex;
+    justify-content: center;
+}

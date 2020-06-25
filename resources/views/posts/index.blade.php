@@ -2,7 +2,7 @@
 @section('content')
 <div class="content">
     <div class="row">
-        <a class="btn btn-success float-left" href="{{route('admin.posts.create')}}" >Add Post</a>
+        <a class="btn btn-success float-right" href="{{route('admin.posts.create')}}" >+ Add Post</a>
 
         <div class="col-lg-12">
             <ul class="list-group"> 
@@ -15,17 +15,8 @@
                         <p class="ArticleBody">{{ substr(strip_tags($post->body), 0, 500) }}
                             {{ strlen(strip_tags($post->body)) > 50 ? "..." : "" }} 
                         </p>
-                        <a href="{{route('admin.posts.show',['post'=>$post->id])}}">Read More ...</a>
+                        <a style="color: rgb(187, 22, 22);font-family: fantasy; font-size: medium" href="{{route('admin.posts.show',['post'=>$post->id])}}">Read More ...</a>
                     </div>
-                    
-                    {{-- <form style="display: inline" method="POST" action="{{route('admin.posts.destroy',['post'=>$post->id])}}">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-success col-md-6" type="button">
-                        <a style="color: white" href="{{route('admin.posts.edit',['post'=>$post->id])}}">Edit</a>
-                        </button>
-                        <button class="btn btn-danger float-right col-md-6" type="submit">Delete</button>
-                    </form>    --}}
                   </div>
                 </div>
                 @empty
